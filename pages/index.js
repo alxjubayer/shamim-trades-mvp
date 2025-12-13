@@ -3,14 +3,12 @@ import Head from 'next/head';
 
 export default function Home() {
   const [lang, setLang] = useState('en');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // লগইন চেক করার জন্য
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // লগইন ফাংশন
   const handleLogin = (e) => {
     e.preventDefault();
-    // আপাতত যেকোনো নাম বা পাসওয়ার্ড দিলেই লগইন হবে (পরে আমরা আসল পাসওয়ার্ড সেট করব)
     if (username && password) {
       setIsLoggedIn(true);
     } else {
@@ -18,7 +16,6 @@ export default function Home() {
     }
   };
 
-  // যদি লগইন না করা থাকে, তবে লগইন পেজ দেখাবে
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 font-sans p-4">
@@ -69,7 +66,6 @@ export default function Home() {
     );
   }
 
-  // লগইন সফল হলে ড্যাশবোর্ড দেখাবে
   return (
     <>
       <Head>
@@ -79,8 +75,6 @@ export default function Home() {
 
       <div className="min-h-screen bg-gray-50 p-4 font-sans">
         <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
-          
-          {/* Header Section */}
           <div className="bg-blue-600 p-6 text-white flex justify-between items-center">
             <div>
               <h1 className="text-2xl md:text-3xl font-bold">
@@ -89,24 +83,16 @@ export default function Home() {
               <p className="text-sm opacity-80">{lang === 'en' ? 'Authorized Dashboard' : 'অনুমোদিত ড্যাশবোর্ড'}</p>
             </div>
             <div className="flex gap-2">
-              <button 
-                onClick={() => setLang(lang === 'en' ? 'bn' : 'en')} 
-                className="bg-white/20 text-white px-3 py-1 rounded-full text-sm hover:bg-white/30 transition"
-              >
+              <button onClick={() => setLang(lang === 'en' ? 'bn' : 'en')} className="bg-white/20 text-white px-3 py-1 rounded-full text-sm hover:bg-white/30 transition">
                 {lang === 'en' ? 'বাংলা' : 'ENG'}
               </button>
-              <button 
-                onClick={() => setIsLoggedIn(false)} 
-                className="bg-red-500 text-white px-3 py-1 rounded-full text-sm hover:bg-red-600 transition"
-              >
+              <button onClick={() => setIsLoggedIn(false)} className="bg-red-500 text-white px-3 py-1 rounded-full text-sm hover:bg-red-600 transition">
                 {lang === 'en' ? 'Logout' : 'লগ আউট'}
               </button>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-            
-            {/* Employee Sign Up */}
             <div className="border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition bg-white">
               <h2 className="text-xl font-bold mb-4 text-gray-700 border-b pb-2">
                 {lang === 'en' ? 'Employee Sign Up' : 'কর্মচারী নিবন্ধন'}
@@ -114,46 +100,45 @@ export default function Home() {
               <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
                 <label className="text-sm font-medium text-gray-600">{lang === 'en' ? 'Name' : 'নাম'}</label>
                 <input placeholder="..." className="border p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
-                
                 <label className="text-sm font-medium text-gray-600">{lang === 'en' ? 'Designation' : 'পদবী'}</label>
                 <input placeholder="..." className="border p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
-                
                 <button type="submit" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded mt-2 transition">
                   {lang === 'en' ? 'Submit' : 'জমা দিন'}
                 </button>
               </form>
             </div>
 
-            {/* Notice Board */}
             <div className="border border-yellow-200 rounded-xl p-6 shadow-sm bg-yellow-50">
               <h2 className="text-xl font-bold mb-4 text-yellow-800 border-b border-yellow-200 pb-2">
                 {lang === 'en' ? 'Notice Board' : 'নোটিশ বোর্ড'}
               </h2>
               <ul className="list-disc list-inside text-gray-700 space-y-2">
                 <li>{lang === 'en' ? 'Welcome to Shamim Traders!' : 'শামীম ট্রেডার্সে স্বাগতম!'}</li>
-                <li>{lang === 'en' ? 'System Updated Successfully' : 'সিস্টেম সফলভাবে আপডেট হয়েছে'}</li>
               </ul>
             </div>
 
-            {/* Post Section */}
             <div className="border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition bg-white">
               <h2 className="text-xl font-bold mb-4 text-gray-700 border-b pb-2">
                 {lang === 'en' ? 'Post Section' : 'পোস্ট সেকশন'}
               </h2>
-              <textarea 
-                placeholder={lang === 'en' ? 'Write something...' : 'কিছু লিখুন...'} 
-                className="border p-3 rounded w-full h-24 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
-              ></textarea>
+              <textarea placeholder={lang === 'en' ? 'Write something...' : 'কিছু লিখুন...'} className="border p-3 rounded w-full h-24 focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
               <button className="mt-3 bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded transition">
                 {lang === 'en' ? 'Post' : 'পোস্ট দিন'}
               </button>
             </div>
 
-            {/* Location */}
             <div className="border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition bg-white">
               <h2 className="text-xl font-bold mb-4 text-gray-700 border-b pb-2">
                 {lang === 'en' ? 'Location' : 'লোকেশন'}
               </h2>
               <div className="rounded-lg overflow-hidden border">
-                <iframe
-
+                <iframe src="https://www.google.com/maps?q=23.7937,90.4066&hl=es;z=14&output=embed" width="100%" height="200" style={{border:0}} allowFullScreen="" loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-100 p-4 text-center text-gray-500 text-sm">© 2025 M/S Shamim Traders</div>
+        </div>
+      </div>
+    </>
+  )
+}
